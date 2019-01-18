@@ -1,0 +1,37 @@
+{
+  "name": "q-convert",
+  "version": "0.9.0",
+  "description": "Quantum Programming Language Converter",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/perak/q-convert"
+  },
+  "keywords": [
+    "quantum",
+    "qubit",
+    "qbit",
+    "simulator",
+    "emulator",
+    "qasm",
+    "openqasm",
+    "quil",
+    "pyquil"
+  ],
+  "preferGlobal": "true",
+  "bin": {
+    "q-convert": "cli.js"
+  },
+  "author": "Petar Korponaić <petar.korponaic@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "command-line-args": "^5.0.2",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
+    "quantum-circuit": "^0.9.48",
+    "replace-ext": "^1.0.0"
+  }
+}
