@@ -1,6 +1,6 @@
 {
   "name": "q-convert",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Quantum Programming Language Converter",
   "main": "cli.js",
   "scripts": {
