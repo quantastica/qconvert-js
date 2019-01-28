@@ -25,7 +25,7 @@ var printUsage = function() {
 	console.log("\t\t-i, --input\tInput file");
 	console.log("\t\t-s, --source\tSource format (qasm)");
 	console.log("\t\t-o, --output\tOutput file");
-	console.log("\t\t-d, --dest\tDestination format (qasm, quil, pyquil, quantum-circuit, toaster, svg)");
+	console.log("\t\t-d, --dest\tDestination format (qiskit, qasm, quil, pyquil, quantum-circuit, toaster, svg)");
 	console.log("\t\t-w, --overwrite\tOverwrite output file if it already exists");
 	console.log("");
 	console.log("Enjoy! :)");
@@ -93,6 +93,7 @@ circuit.importQASM(inputFile, function(errors) {
 
 	var outputStr = "";
 	switch(args.dest) {
+		case "qiskit": outputStr = circuit.exportQiskit(); break;
 		case "qasm": outputStr = circuit.exportQASM(); break;
 		case "quil": outputStr = circuit.exportQuil(); break;
 		case "pyquil": outputStr = circuit.exportPyquil(); break;
