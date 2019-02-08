@@ -17,7 +17,7 @@ q-convert -i input_file -s source_format -o output_file -d destination_format [-
 	-i, --input      Input file
 	-s, --source     Source format. Can be: qasm
 	-o, --output     Output file
-	-d, --dest       Destination format. Can be one of: qiskit, qasm, quil, pyquil, quantum-circuit, toaster, svg
+	-d, --dest       Destination format. Can be one of: qiskit, qasm, quil, pyquil, cirq, quantum-circuit, toaster, svg
 	-w, --overwrite  Overwrite output file if it already exists
 
 ```
