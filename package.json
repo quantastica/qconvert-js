@@ -1,6 +1,6 @@
 {
   "name": "q-convert",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "Quantum Programming Language Converter",
   "main": "cli.js",
   "scripts": {
@@ -19,7 +19,9 @@
     "qasm",
     "openqasm",
     "quil",
-    "pyquil"
+    "pyquil",
+    "qiskit",
+    "cirq"
   ],
   "preferGlobal": "true",
   "bin": {
@@ -31,7 +33,7 @@
     "command-line-args": "^5.0.2",
     "fs": "0.0.1-security",
     "path": "^0.12.7",
-    "quantum-circuit": "^0.9.59",
+    "quantum-circuit": "^0.9.64",
     "replace-ext": "^1.0.0"
   }
 }
