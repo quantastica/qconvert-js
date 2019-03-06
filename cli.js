@@ -11,6 +11,7 @@ const optionDefinitions = [
   { name: "source", alias: "s", type: String },
   { name: "output", alias: "o", type: String },
   { name: "dest", alias: "d", type: String },
+  { name: "jupyter", alias: "j", type: Boolean},
   { name: "overwrite", alias: "w", type: Boolean}
 ];
 
@@ -21,11 +22,12 @@ var printUsage = function() {
 	console.log("Q-Convert - Quantum Language Converter");
 	console.log("");
 	console.log("Usage:");
-	console.log("\tq-convert -i input_file -s source_format -o output_file -d destination_format [-w]");
+	console.log("\tq-convert -i input_file -s source_format -o output_file -d destination_format [-j] [-w]");
 	console.log("\t\t-i, --input\tInput file");
 	console.log("\t\t-s, --source\tSource format (qasm)");
 	console.log("\t\t-o, --output\tOutput file");
 	console.log("\t\t-d, --dest\tDestination format (qiskit, qasm, quil, pyquil, cirq, quantum-circuit, toaster, svg)");
+	console.log("\t\t-j, --jupyter\tOutput jupyter notebook instead python file (for qiskit, pyquil, and cirq only)");
 	console.log("\t\t-w, --overwrite\tOverwrite output file if it already exists");
 	console.log("");
 	console.log("Enjoy! :)");
@@ -83,6 +85,8 @@ try {
 	process.exit(1);
 }
 
+var jupyter = !!args.jupyter;
+
 var circuit = new QuantumCircuit();
 
 circuit.importQASM(inputFile, function(errors) {
@@ -93,11 +97,11 @@ circuit.importQASM(inputFile, function(errors) {
 
 	var outputStr = "";
 	switch(args.dest) {
-		case "qiskit": outputStr = circuit.exportQiskit(); break;
+		case "qiskit": outputStr = circuit.exportQiskit("", false, null, null, null, null, jupyter); break;
 		case "qasm": outputStr = circuit.exportQASM(); break;
 		case "quil": outputStr = circuit.exportQuil(); break;
-		case "pyquil": outputStr = circuit.exportPyquil(); break;
-		case "cirq": outputStr = circuit.exportCirq(); break;
+		case "pyquil": outputStr = circuit.exportPyquil("", false, null, null, null, null, jupyter); break;
+		case "cirq": outputStr = circuit.exportCirq("", false, null, null, jupyter); break;
 		case "quantum-circuit": outputStr = JSON.stringify(circuit.save()); break;
 		case "toaster": outputStr = JSON.stringify(circuit.exportRaw()); break;
 		case "svg": outputStr = circuit.exportSVG(); break;
