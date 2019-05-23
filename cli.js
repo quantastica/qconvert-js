@@ -26,7 +26,7 @@ var printUsage = function() {
 	console.log("\t\t-i, --input\tInput file");
 	console.log("\t\t-s, --source\tSource format (qasm)");
 	console.log("\t\t-o, --output\tOutput file");
-	console.log("\t\t-d, --dest\tDestination format (qiskit, qasm, quil, pyquil, cirq, quantum-circuit, toaster, svg)");
+	console.log("\t\t-d, --dest\tDestination format (qiskit, qasm, quil, pyquil, cirq, quest, quantum-circuit, toaster, svg)");
 	console.log("\t\t-j, --jupyter\tOutput jupyter notebook instead python file (for qiskit, pyquil, and cirq only)");
 	console.log("\t\t-w, --overwrite\tOverwrite output file if it already exists");
 	console.log("");
@@ -102,6 +102,7 @@ circuit.importQASM(inputFile, function(errors) {
 		case "quil": outputStr = circuit.exportQuil(); break;
 		case "pyquil": outputStr = circuit.exportPyquil("", false, null, null, null, null, jupyter); break;
 		case "cirq": outputStr = circuit.exportCirq("", false, null, null, jupyter); break;
+		case "quest": outputStr = circuit.exportQuEST("", false, null, null); break;
 		case "quantum-circuit": outputStr = JSON.stringify(circuit.save()); break;
 		case "toaster": outputStr = JSON.stringify(circuit.exportRaw()); break;
 		case "svg": outputStr = circuit.exportSVG(); break;
