@@ -30,10 +30,10 @@
   "author": "Petar Korponaić <petar.korponaic@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "command-line-args": "^5.0.2",
+    "command-line-args": "^5.1.1",
     "fs": "0.0.1-security",
     "path": "^0.12.7",
-    "quantum-circuit": "^0.9.95",
+    "quantum-circuit": "^0.9.103",
     "replace-ext": "^1.0.0"
   }
 }
