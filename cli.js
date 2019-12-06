@@ -12,7 +12,8 @@ const optionDefinitions = [
   { name: "output", alias: "o", type: String },
   { name: "dest", alias: "d", type: String },
   { name: "jupyter", alias: "j", type: Boolean},
-  { name: "overwrite", alias: "w", type: Boolean}
+  { name: "overwrite", alias: "w", type: Boolean},
+  { name: "help", alias: "h", type: Boolean}
 ];
 
 const args = commandLineArgs(optionDefinitions);
@@ -26,13 +27,18 @@ var printUsage = function() {
 	console.log("        -i, --input\tInput file");
 	console.log("        -s, --source\tSource format (qasm)");
 	console.log("        -o, --output\tOutput file");
-	console.log("        -d, --dest\tDestination format (qiskit, qasm, quil, pyquil, cirq, qsharp, quest, js, quantum-circuit, toaster, svg)");
+	console.log("        -d, --dest\tDestination format: qiskit, qasm, quil, pyquil, cirq, qsharp, quest, js, quantum-circuit, toaster, svg");
 	console.log("        -j, --jupyter\tOutput jupyter notebook (for qiskit, pyquil, cirq, qsharp, and js only)");
 	console.log("        -w, --overwrite\tOverwrite output file if it already exists");
+	console.log("        -h, --help\tPrint this help text");
 	console.log("");
 	console.log("Enjoy! :)");
 	console.log("");
 };
+
+if(args.help) {
+	printUsage();
+}
 
 if(!args.input) {
 	printUsage();

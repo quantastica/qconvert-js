@@ -1,7 +1,7 @@
 {
   "name": "q-convert",
-  "version": "0.9.16",
-  "description": "Quantum Programming Language Converter",
+  "version": "0.9.17",
+  "description": "Quantum Computing Language Converter",
   "main": "cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
   },
   "keywords": [
     "quantum",
+    "quantum computing",
     "qubit",
     "qbit",
     "simulator",
@@ -33,7 +34,7 @@
     "command-line-args": "^5.1.1",
     "fs": "0.0.1-security",
     "path": "^0.12.7",
-    "quantum-circuit": "^0.9.111",
+    "quantum-circuit": "^0.9.116",
     "replace-ext": "^1.0.0"
   }
 }
