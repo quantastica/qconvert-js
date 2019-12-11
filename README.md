@@ -17,9 +17,9 @@ Q-Convert - Quantum Language Converter
 Usage:
     q-convert -i input_file -s source_format -o output_file -d destination_format [-j] [-w]
         -i, --input     Input file
-        -s, --source    Source format (qasm)
+        -s, --source    Source format: qasm, qobj
         -o, --output    Output file
-        -d, --dest      Destination format: qiskit, qasm, quil, pyquil, cirq, qsharp, quest, js, quantum-circuit, toaster, svg
+        -d, --dest      Destination format: qiskit, qasm, qobj, quil, pyquil, cirq, qsharp, quest, js, quantum-circuit, toaster, svg
         -j, --jupyter   Output jupyter notebook (for qiskit, pyquil, cirq, qsharp, and js only)
         -w, --overwrite Overwrite output file if it already exists
         -h, --help      Print this help text
@@ -30,17 +30,17 @@ Usage:
 
 The following command will take `my_circuit.qasm` and output vector image of circuit diagram `my_circuit.svg`
 ```
-q-convert -i my_circuit.qasm -s qasm -o my_circuit.svg -d svg
+q-convert -i my_circuit.qasm -s qasm -o my_circuit.svg -d svg -w
 ```
 
 Convert from QASM to Q# (QSharp)
 ```
-q-convert -i my_circuit.qasm -s qasm -o my_circuit.qs -d qsharp
+q-convert -i my_circuit.qasm -s qasm -o my_circuit.qs -d qsharp -w
 ```
 
 Convert from QASM to jupyter notebook with pyQuil code inside:
 ```
-q-convert -i my_circuit.qasm -s qasm -o my_circuit.ipynb -d pyquil -j
+q-convert -i my_circuit.qasm -s qasm -o my_circuit.ipynb -d pyquil -j -w
 ```
 
 

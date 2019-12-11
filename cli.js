@@ -4,7 +4,9 @@ const commandLineArgs = require("command-line-args");
 const fs = require("fs");
 const path = require("path");
 const replaceExt = require("replace-ext");
+
 const QuantumCircuit = require("quantum-circuit");
+
 
 const optionDefinitions = [
   { name: "input", alias: "i", type: String },
@@ -25,9 +27,9 @@ var printUsage = function() {
 	console.log("Usage:");
 	console.log("    q-convert -i input_file -s source_format -o output_file -d destination_format [-j] [-w]");
 	console.log("        -i, --input\tInput file");
-	console.log("        -s, --source\tSource format (qasm)");
+	console.log("        -s, --source\tSource format: qasm, qobj");
 	console.log("        -o, --output\tOutput file");
-	console.log("        -d, --dest\tDestination format: qiskit, qasm, quil, pyquil, cirq, qsharp, quest, js, quantum-circuit, toaster, svg");
+	console.log("        -d, --dest\tDestination format: qiskit, qasm, qobj, quil, pyquil, cirq, qsharp, quest, js, quantum-circuit, toaster, svg");
 	console.log("        -j, --jupyter\tOutput jupyter notebook (for qiskit, pyquil, cirq, qsharp, and js only)");
 	console.log("        -w, --overwrite\tOverwrite output file if it already exists");
 	console.log("        -h, --help\tPrint this help text");
@@ -93,18 +95,13 @@ try {
 
 var jupyter = !!args.jupyter;
 
-var circuit = new QuantumCircuit();
 
-circuit.importQASM(inputFile, function(errors) {
-	if(errors.length) {
-		console.log(errors);
-		process.exit(1);		
-	}
-
+var writeOutput = function(circuit) {
 	var outputStr = "";
 	switch(args.dest) {
 		case "qiskit": outputStr = circuit.exportQiskit("", false, null, null, null, null, jupyter); break;
 		case "qasm": outputStr = circuit.exportQASM(); break;
+		case "qobj": outputStr = circuit.exportQobj(); break;
 		case "quil": outputStr = circuit.exportQuil(); break;
 		case "pyquil": outputStr = circuit.exportPyquil("", false, null, null, null, null, jupyter); break;
 		case "cirq": outputStr = circuit.exportCirq("", false, null, null, jupyter); break;
@@ -126,4 +123,49 @@ circuit.importQASM(inputFile, function(errors) {
 		console.log("Error: cannot write output \"" + args.output + "\". " + e.message);
 		process.exit(1);
 	}
-});
+
+};
+
+var convert = function() {
+	var circuit = new QuantumCircuit();
+
+	switch(args.source) {
+		case "qasm": {
+			circuit.importQASM(inputFile, function(errors) {
+				if(errors && errors.length) {
+					console.log(errors);
+					process.exit(1);		
+				}
+
+				writeOutput(circuit);
+			});
+		}; break;
+
+		case "qobj": {
+			var inputJson = null;
+			try {
+				inputJson = JSON.parse(inputFile);
+			} catch(err) {
+				console.log("Error parsing input file as JSON. " + err.message);
+				process.exit(1);
+			}
+
+			circuit.importQobj(inputJson, function(errors) {
+				if(errors && errors.length) {
+					console.log(errors);
+					process.exit(1);		
+				}
+
+				writeOutput(circuit);			
+			});
+
+		}; break;
+
+		default: {
+			console.log("Error: unknown input file format \"" + args.source + "\".");
+			process.exit(1);
+		}
+	};
+};
+
+convert();
