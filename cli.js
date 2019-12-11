@@ -101,7 +101,7 @@ var writeOutput = function(circuit) {
 	switch(args.dest) {
 		case "qiskit": outputStr = circuit.exportQiskit("", false, null, null, null, null, jupyter); break;
 		case "qasm": outputStr = circuit.exportQASM(); break;
-		case "qobj": outputStr = circuit.exportQobj(); break;
+		case "qobj": outputStr = JSON.stringify(circuit.exportQobj()); break;
 		case "quil": outputStr = circuit.exportQuil(); break;
 		case "pyquil": outputStr = circuit.exportPyquil("", false, null, null, null, null, jupyter); break;
 		case "cirq": outputStr = circuit.exportCirq("", false, null, null, jupyter); break;
