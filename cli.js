@@ -27,9 +27,9 @@ var printUsage = function() {
 	console.log("Usage:");
 	console.log("    q-convert -i input_file -s source_format -o output_file -d destination_format [-j] [-w]");
 	console.log("        -i, --input\tInput file");
-	console.log("        -s, --source\tSource format: qasm, qobj");
+	console.log("        -s, --source\tSource format: qasm, qobj, quantum-circuit");
 	console.log("        -o, --output\tOutput file");
-	console.log("        -d, --dest\tDestination format: qiskit, qasm, qobj, quil, pyquil, cirq, qsharp, quest, js, quantum-circuit, toaster, svg");
+	console.log("        -d, --dest\tDestination format: qiskit, qasm, qobj, quil, pyquil, cirq, qsharp, quest, js, quantum-circuit, toaster, svg, svg-inline");
 	console.log("        -j, --jupyter\tOutput jupyter notebook (for qiskit, pyquil, cirq, qsharp, and js only)");
 	console.log("        -w, --overwrite\tOverwrite output file if it already exists");
 	console.log("        -h, --help\tPrint this help text");
@@ -38,13 +38,12 @@ var printUsage = function() {
 	console.log("");
 };
 
-if(args.help) {
+if(!args.input || args.help) {
 	printUsage();
-}
 
-if(!args.input) {
-	printUsage();
-	process.exit(1);
+	if(!args.input) {
+		process.exit(1);
+	}
 }
 
 if(!fs.existsSync(args.input)) {
@@ -110,7 +109,8 @@ var writeOutput = function(circuit) {
 		case "quest": outputStr = circuit.exportQuEST("", false, null, null); break;
 		case "quantum-circuit": outputStr = JSON.stringify(circuit.save()); break;
 		case "toaster": outputStr = JSON.stringify(circuit.exportRaw()); break;
-		case "svg": outputStr = circuit.exportSVG(); break;
+		case "svg": outputStr = circuit.exportSVG(false); break;
+		case "svg-inline": outputStr = circuit.exportSVG(true); break;
 		default: {
 			console.log("Error: unknown destination format.");
 			process.exit(1);
@@ -159,6 +159,25 @@ var convert = function() {
 				writeOutput(circuit);			
 			});
 
+		}; break;
+
+		case "quantum-circuit": {
+			var inputJson = null;
+			try {
+				inputJson = JSON.parse(inputFile);
+			} catch(err) {
+				console.log("Error parsing input file as JSON. " + err.message);
+				process.exit(1);
+			}
+
+			try {
+				circuit.load(inputJson);
+			} catch(err) {
+				console.log(err);
+				process.exit(1);
+			}
+
+			writeOutput(circuit);
 		}; break;
 
 		default: {
