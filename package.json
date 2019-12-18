@@ -1,6 +1,6 @@
 {
   "name": "q-convert",
-  "version": "0.9.20",
+  "version": "0.9.21",
   "description": "Quantum Computing Language Converter",
   "main": "cli.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/perak/q-convert"
+    "url": "https://github.com/quantastica/qconvert-js"
   },
   "keywords": [
     "quantum",
@@ -30,7 +30,7 @@
   "bin": {
     "q-convert": "cli.js"
   },
-  "author": "Petar Korponaić <petar.korponaic@gmail.com>",
+  "author": "Quantastica <info@quantastica.com>",
   "license": "MIT",
   "dependencies": {
     "command-line-args": "^5.1.1",

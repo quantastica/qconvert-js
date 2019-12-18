@@ -53,5 +53,9 @@ Online version is available at: <a href="https://quantum-circuit.com/qconvert" t
 
 More input & output languages will be added soon.
 
+## License
+
+[MIT](LICENSE.txt)
+
 
 That's it. Enjoy!
