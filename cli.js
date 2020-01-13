@@ -27,7 +27,7 @@ var printUsage = function() {
 	console.log("Usage:");
 	console.log("    q-convert -i input_file -s source_format -o output_file -d destination_format [-j] [-w]");
 	console.log("        -i, --input\tInput file");
-	console.log("        -s, --source\tSource format: qasm, qobj, quantum-circuit");
+	console.log("        -s, --source\tSource format: qasm, quil, qobj, quantum-circuit");
 	console.log("        -o, --output\tOutput file");
 	console.log("        -d, --dest\tDestination format: qiskit, qasm, qobj, quil, pyquil, cirq, qsharp, quest, js, quantum-circuit, toaster, svg, svg-inline");
 	console.log("        -j, --jupyter\tOutput jupyter notebook (for qiskit, pyquil, cirq, qsharp, and js only)");
@@ -38,12 +38,17 @@ var printUsage = function() {
 	console.log("");
 };
 
-if(!args.input || args.help) {
+if(args.help) {
 	printUsage();
 
 	if(!args.input) {
 		process.exit(1);
 	}
+}
+
+if(!args.input) {
+	console.log("Error: please specify input file.");
+	process.exit(1);
 }
 
 if(!fs.existsSync(args.input)) {
@@ -59,7 +64,7 @@ if(!inputStat.isFile()) {
 }
 
 if(!args.output) {
-	printUsage();
+	console.log("Error: please specify output file.");
 	process.exit(1);
 }
 
@@ -79,7 +84,12 @@ if(fs.existsSync(args.output)) {
 }
 
 if(!args.source) {
-	console.log("Error: unknown input file format.");
+	console.log("Error: please specify source file format.");
+	process.exit(1);
+}
+
+if(!args.dest) {
+	console.log("Error: please specify destination file format.");
 	process.exit(1);
 }
 
@@ -112,7 +122,7 @@ var writeOutput = function(circuit) {
 		case "svg": outputStr = circuit.exportSVG(false); break;
 		case "svg-inline": outputStr = circuit.exportSVG(true); break;
 		default: {
-			console.log("Error: unknown destination format.");
+			console.log("Error: unknown destination format \"" + args.dest + "\".");
 			process.exit(1);
 		}
 	}
@@ -139,6 +149,17 @@ var convert = function() {
 
 				writeOutput(circuit);
 			});
+		}; break;
+
+		case "quil": {
+			circuit.importQuil(inputFile, function(errors) {
+				if(errors && errors.length) {
+					console.log(errors);
+					process.exit(1);
+				}
+			});
+
+			writeOutput(circuit);
 		}; break;
 
 		case "qobj": {
