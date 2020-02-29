@@ -16,13 +16,13 @@ Q-Convert - Quantum Language Converter
 
 Usage:
     q-convert -i input_file -s source_format -o output_file -d destination_format [-j] [-w]
-        -i, --input     Input file
-        -s, --source    Source format: qasm, qobj, quantum-circuit
-        -o, --output    Output file
-        -d, --dest      Destination format: qiskit, qasm, qobj, quil, pyquil, cirq, qsharp, quest, js, quantum-circuit, toaster, svg, svg-inline
-        -j, --jupyter   Output jupyter notebook (for qiskit, pyquil, cirq, qsharp, and js only)
-        -w, --overwrite Overwrite output file if it already exists
-        -h, --help      Print this help text
+        -i, --input	Input file
+        -s, --source	Source format: qasm, quil, qobj, quantum-circuit
+        -o, --output	Output file
+        -d, --dest	Destination format: qiskit, qasm, qobj, quil, pyquil, cirq, qsharp, quest, js, quantum-circuit, toaster, svg, svg-inline
+        -j, --jupyter	Output jupyter notebook (for qiskit, pyquil, cirq, qsharp, and js only)
+        -w, --overwrite	Overwrite output file if it already exists
+        -h, --help	Print this help text
 
 ```
 
