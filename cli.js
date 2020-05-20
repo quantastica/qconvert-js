@@ -27,10 +27,10 @@ var printUsage = function() {
 	console.log("Usage:");
 	console.log("    q-convert -i input_file -s source_format -o output_file -d destination_format [-j] [-w]");
 	console.log("        -i, --input\tInput file");
-	console.log("        -s, --source\tSource format: qasm, quil, qobj, quantum-circuit");
+	console.log("        -s, --source\tSource format: qasm, quil, qobj, quantum-circuit, toaster");
 	console.log("        -o, --output\tOutput file");
-	console.log("        -d, --dest\tDestination format: qiskit, qasm, qobj, quil, pyquil, cirq, qsharp, quest, js, quantum-circuit, toaster, svg, svg-inline");
-	console.log("        -j, --jupyter\tOutput jupyter notebook (for qiskit, pyquil, cirq, qsharp, and js only)");
+	console.log("        -d, --dest\tDestination format: qiskit, qasm, qobj, quil, pyquil, cirq, tfq, qsharp, quest, js, quantum-circuit, toaster, svg, svg-inline");
+	console.log("        -j, --jupyter\tOutput jupyter notebook (for qiskit, pyquil, cirq, tfq, qsharp, and js only)");
 	console.log("        -w, --overwrite\tOverwrite output file if it already exists");
 	console.log("        -h, --help\tPrint this help text");
 	console.log("");
@@ -114,6 +114,7 @@ var writeOutput = function(circuit) {
 		case "quil": outputStr = circuit.exportQuil(); break;
 		case "pyquil": outputStr = circuit.exportPyquil("", false, null, null, null, null, jupyter); break;
 		case "cirq": outputStr = circuit.exportCirq("", false, null, null, jupyter); break;
+		case "tfq": outputStr = circuit.exportTFQ("", false, null, null, jupyter); break;
 		case "qsharp": outputStr = circuit.exportQSharp("", false, null, null, jupyter); break;
 		case "js": outputStr = circuit.exportJavaScript("", false, null, jupyter); break;
 		case "quest": outputStr = circuit.exportQuEST("", false, null, null); break;
@@ -199,6 +200,26 @@ var convert = function() {
 			}
 
 			writeOutput(circuit);
+		}; break;
+
+		case "toaster": {
+			var inputJson = null;
+			try {
+				inputJson = JSON.parse(inputFile);
+			} catch(err) {
+				console.log("Error parsing input file as JSON. " + err.message);
+				process.exit(1);
+			}
+
+			circuit.importRaw(inputJson, function(errors) {
+				if(errors && errors.length) {
+					console.log(errors);
+					process.exit(1);
+				}
+
+				writeOutput(circuit);
+			});
+
 		}; break;
 
 		default: {
