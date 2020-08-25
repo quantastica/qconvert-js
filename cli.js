@@ -29,8 +29,8 @@ var printUsage = function() {
 	console.log("        -i, --input\tInput file");
 	console.log("        -s, --source\tSource format: qasm, quil, qobj, quantum-circuit, toaster");
 	console.log("        -o, --output\tOutput file");
-	console.log("        -d, --dest\tDestination format: qiskit, qasm, qobj, quil, pyquil, cirq, tfq, qsharp, quest, js, quantum-circuit, toaster, svg, svg-inline");
-	console.log("        -j, --jupyter\tOutput jupyter notebook (for qiskit, pyquil, cirq, tfq, qsharp, and js only)");
+	console.log("        -d, --dest\tDestination format: qiskit, qasm, qobj, quil, pyquil, braket, cirq, tfq, qsharp, quest, js, quantum-circuit, toaster, svg, svg-inline");
+	console.log("        -j, --jupyter\tOutput jupyter notebook (for qiskit, pyquil, braket, cirq, tfq, qsharp, and js only)");
 	console.log("        -w, --overwrite\tOverwrite output file if it already exists");
 	console.log("        -h, --help\tPrint this help text");
 	console.log("");
@@ -113,6 +113,7 @@ var writeOutput = function(circuit) {
 		case "qobj": outputStr = JSON.stringify(circuit.exportQobj()); break;
 		case "quil": outputStr = circuit.exportQuil(); break;
 		case "pyquil": outputStr = circuit.exportPyquil("", false, null, null, null, null, jupyter); break;
+		case "braket": outputStr = circuit.exportBraket("", false, null, null, jupyter); break;
 		case "cirq": outputStr = circuit.exportCirq("", false, null, null, jupyter); break;
 		case "tfq": outputStr = circuit.exportTFQ("", false, null, null, jupyter); break;
 		case "qsharp": outputStr = circuit.exportQSharp("", false, null, null, jupyter); break;
