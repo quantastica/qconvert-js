@@ -1,6 +1,6 @@
 {
   "name": "q-convert",
-  "version": "0.9.42",
+  "version": "0.9.43",
   "description": "Quantum Computing Language Converter",
   "main": "cli.js",
   "scripts": {
@@ -38,7 +38,7 @@
     "command-line-args": "^5.1.1",
     "fs": "0.0.1-security",
     "path": "^0.12.7",
-    "quantum-circuit": "^0.9.166",
+    "quantum-circuit": "^0.9.175",
     "replace-ext": "^1.0.1"
   }
 }
