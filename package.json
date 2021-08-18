@@ -1,6 +1,6 @@
 {
   "name": "q-convert",
-  "version": "0.9.43",
+  "version": "0.9.44",
   "description": "Quantum Computing Language Converter",
   "main": "cli.js",
   "scripts": {
@@ -35,10 +35,10 @@
   "license": "MIT",
   "homepage": "https://quantum-circuit.com/qconvert",
   "dependencies": {
-    "command-line-args": "^5.1.1",
+    "command-line-args": "^5.2.0",
     "fs": "0.0.1-security",
     "path": "^0.12.7",
-    "quantum-circuit": "^0.9.175",
+    "quantum-circuit": "^0.9.184",
     "replace-ext": "^1.0.1"
   }
 }
