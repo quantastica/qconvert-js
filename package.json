@@ -1,6 +1,6 @@
 {
   "name": "q-convert",
-  "version": "0.9.44",
+  "version": "0.9.45",
   "description": "Quantum Computing Language Converter",
   "main": "cli.js",
   "scripts": {
