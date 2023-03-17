@@ -17,7 +17,7 @@ Q-Convert - Quantum Language Converter
 Usage:
     q-convert -i input_file -s source_format -o output_file -d destination_format [-j] [-w]
         -i, --input	Input file
-        -s, --source	Source format: qasm, quil, qobj, quantum-circuit, toaster
+        -s, --source	Source format: qasm, quil, qobj, ionq, quantum-circuit, toaster
         -o, --output	Output file
         -d, --dest	Destination format: qiskit, qasm, qasm-ext, qobj, quil, pyquil, braket, cirq, tfq, qsharp, quest, js, quantum-circuit, toaster, svg, svg-inline
         -j, --jupyter	Output jupyter notebook (for qiskit, pyquil, braket, cirq, tfq, qsharp, and js only)
