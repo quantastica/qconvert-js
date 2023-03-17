@@ -27,7 +27,7 @@ var printUsage = function() {
 	console.log("Usage:");
 	console.log("    q-convert -i input_file -s source_format -o output_file -d destination_format [-j] [-w]");
 	console.log("        -i, --input\tInput file");
-	console.log("        -s, --source\tSource format: qasm, quil, qobj, quantum-circuit, toaster");
+	console.log("        -s, --source\tSource format: qasm, quil, qobj, ionq, quantum-circuit, toaster");
 	console.log("        -o, --output\tOutput file");
 	console.log("        -d, --dest\tDestination format: qiskit, qasm, qobj, quil, pyquil, braket, cirq, tfq, qsharp, quest, js, quantum-circuit, toaster, svg, svg-inline");
 	console.log("        -j, --jupyter\tOutput jupyter notebook (for qiskit, pyquil, braket, cirq, tfq, qsharp, and js only)");
@@ -110,6 +110,7 @@ var writeOutput = function(circuit) {
 	switch(args.dest) {
 		case "qiskit": outputStr = circuit.exportQiskit("", false, null, null, null, null, jupyter); break;
 		case "qasm": outputStr = circuit.exportQASM(); break;
+		case "qasm-ext": outputStr = circuit.exportQASM(null, false, null, false, true); break;
 		case "qobj": outputStr = JSON.stringify(circuit.exportQobj()); break;
 		case "quil": outputStr = circuit.exportQuil(); break;
 		case "pyquil": outputStr = circuit.exportPyquil("", false, null, null, null, null, jupyter); break;
@@ -182,6 +183,25 @@ var convert = function() {
 				writeOutput(circuit);			
 			});
 
+		}; break;
+
+		case "ionq": {
+			var inputJson = null;
+			try {
+				inputJson = JSON.parse(inputFile);
+			} catch(err) {
+				console.log("Error parsing input file as JSON. " + err.message);
+				process.exit(1);
+			}
+
+			try {
+				circuit.importIonq(inputJson);
+			} catch(err) {
+				console.log(err);
+				process.exit(1);
+			}
+
+			writeOutput(circuit);
 		}; break;
 
 		case "quantum-circuit": {

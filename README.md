@@ -19,7 +19,7 @@ Usage:
         -i, --input	Input file
         -s, --source	Source format: qasm, quil, qobj, quantum-circuit, toaster
         -o, --output	Output file
-        -d, --dest	Destination format: qiskit, qasm, qobj, quil, pyquil, braket, cirq, tfq, qsharp, quest, js, quantum-circuit, toaster, svg, svg-inline
+        -d, --dest	Destination format: qiskit, qasm, qasm-ext, qobj, quil, pyquil, braket, cirq, tfq, qsharp, quest, js, quantum-circuit, toaster, svg, svg-inline
         -j, --jupyter	Output jupyter notebook (for qiskit, pyquil, braket, cirq, tfq, qsharp, and js only)
         -w, --overwrite	Overwrite output file if it already exists
         -h, --help	Print this help text
