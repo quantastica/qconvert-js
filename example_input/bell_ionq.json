@@ -1,0 +1,15 @@
+{
+	"qubits": 2,
+	"circuit": [
+		{
+			"gate": "h",
+			"target": 0
+		},
+		{
+			"gate": "cnot",
+			"target": 1,
+			"control": 0
+		}
+	]
+}
+

@@ -1,0 +1,104 @@
+{
+	"numQubits": 2,
+	"params": [],
+	"options": {
+		"params": {},
+		"hybrid": false,
+		"hybridOptions": {
+			"optimizer": "Powell",
+			"tolerance": 0.001,
+			"costFunction": {
+				"python": "",
+				"javascript": ""
+			}
+		},
+		"encoderDecoder": false,
+		"encoderDecoderOptions": {
+			"functionName": "",
+			"inputEncoding": {
+				"type": "custom",
+				"customFunction": {
+					"python": "def custom_encoder(input_data_row, input_encoding):\n    qasm = \"\"\n    qasm += \"OPENQASM 2.0;\\n\"\n    qasm += \"include \\\"qelib1.inc\\\";\\n\"\n\n    # ...\n\n    return qasm\n",
+					"javascript": "function customEncoder(inputDataRow, inputEncoding) {\n    let qasm = \"\";\n    qasm += \"OPENQASM 2.0;\\n\";\n    qasm += \"include \\\"qelib1.inc\\\";\\n\";\n    \n    // ...\n    \n    return qasm;\n}\n"
+				},
+				"qubitOffset": 0,
+				"colDefs": [],
+				"data": []
+			},
+			"outputDecoding": {
+				"type": "custom",
+				"customFunction": {
+					"python": "def custom_decoder(counts, output_decoding):\n    output_data_row = {}\n\n    # ...\n    \n    return output_data_row\n",
+					"javascript": "function customDecoder(counts, outputDecoding) {\n    outputDataRow = {};\n    \n    // ...\n    \n    return outputDataRow;\n}\n"
+				},
+				"qubitOffset": 0,
+				"colDefs": []
+			}
+		}
+	},
+	"gates": [
+		[
+			{
+				"id": "hz56hbds0IZ67o2mRZ",
+				"name": "h",
+				"connector": 0,
+				"options": {
+					"params": {}
+				}
+			},
+			{
+				"id": "RH7CJ2w0bKayZhWAdf",
+				"name": "cx",
+				"connector": 0,
+				"options": {
+					"params": {}
+				}
+			},
+			{
+				"id": "OqtfGMTetbgnRAKZcm",
+				"name": "measure",
+				"connector": 0,
+				"options": {
+					"params": {},
+					"creg": {
+						"bit": 0,
+						"name": "c"
+					}
+				}
+			},
+			null
+		],
+		[
+			null,
+			{
+				"id": "RH7CJ2w0bKayZhWAdf",
+				"name": "cx",
+				"connector": 1,
+				"options": {
+					"params": {}
+				}
+			},
+			null,
+			{
+				"id": "DMFlPEF2VKIe4gPfW4",
+				"name": "measure",
+				"connector": 0,
+				"options": {
+					"params": {},
+					"creg": {
+						"bit": 1,
+						"name": "c"
+					}
+				}
+			}
+		]
+	],
+	"customGates": {},
+	"cregs": {
+		"c": [
+			0,
+			0
+		]
+	}
+}
+

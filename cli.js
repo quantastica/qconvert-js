@@ -29,8 +29,8 @@ var printUsage = function() {
 	console.log("        -i, --input\tInput file");
 	console.log("        -s, --source\tSource format: qasm, quil, qobj, ionq, quantum-circuit, toaster");
 	console.log("        -o, --output\tOutput file");
-	console.log("        -d, --dest\tDestination format: qiskit, qasm, qobj, quil, pyquil, braket, cirq, tfq, qsharp, quest, js, quantum-circuit, toaster, svg, svg-inline");
-	console.log("        -j, --jupyter\tOutput jupyter notebook (for qiskit, pyquil, braket, cirq, tfq, qsharp, and js only)");
+	console.log("        -d, --dest\tDestination format: qiskit, qasm, qobj, quil, pyquil, braket, cirq, tfq, qsharp, quest, cudaq, js, quantum-circuit, toaster, svg, svg-inline");
+	console.log("        -j, --jupyter\tOutput jupyter notebook (for qiskit, pyquil, braket, cirq, tfq, qsharp, cudaq and js only)");
 	console.log("        -w, --overwrite\tOverwrite output file if it already exists");
 	console.log("        -h, --help\tPrint this help text");
 	console.log("");
@@ -120,6 +120,7 @@ var writeOutput = function(circuit) {
 		case "qsharp": outputStr = circuit.exportQSharp("", false, null, null, jupyter); break;
 		case "js": outputStr = circuit.exportJavaScript("", false, null, jupyter); break;
 		case "quest": outputStr = circuit.exportQuEST("", false, null, null); break;
+		case "cudaq": outputStr = circuit.exportCudaQ("", false, null, null, null, null, jupyter); break;
 		case "quantum-circuit": outputStr = JSON.stringify(circuit.save()); break;
 		case "toaster": outputStr = JSON.stringify(circuit.exportRaw()); break;
 		case "svg": outputStr = circuit.exportSVG(false); break;
