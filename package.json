@@ -38,7 +38,7 @@
     "command-line-args": "^5.2.0",
     "fs": "0.0.1-security",
     "path": "^0.12.7",
-    "quantum-circuit": "^0.9.241",
+    "quantum-circuit": "^0.9.243",
     "replace-ext": "^1.0.1"
   }
 }
